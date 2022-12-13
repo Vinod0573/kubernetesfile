@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aksbot-deployment
+  labels:
+    app: aksbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aksbot
+  template:
+    metadata:
+      labels:
+        app: aksbot
+    spec:
+      containers:
+      - name: aksbot
+        image: saarthicore114.azurecr.io/kreditbee_updated_bot
+        ports:
+        - containerPort: 7114
+        - containerPort: 7222
+
+        resources:
+          limits:
+            cpu: 5000m
+            memory: 9000Mi
+          requests:
+            cpu: 1000m
+            memory: 3000Mi
+      imagePullSecrets:
+        - name: secrets-key
