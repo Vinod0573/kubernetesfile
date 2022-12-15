@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kreditbot
+  name: kreditbot-service
+spec:
+  ports:
+  - port: 7114
+    name: botport
+    protocol: TCP
+    targetPort: 7114
+  - port: 7222
+    name: custdata
+    protocol: TCP
+    targetPort: 7222
+  selector:
+    app: kreditbot
+  type: LoadBalancer
+status:
+  loadBalancer: {}

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kreditbot-deployment
+  labels:
+    app: kreditbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kreditbot
+  template:
+    metadata:
+      labels:
+        app: kreditbot
+    spec:
+      containers:
+      - name: kreditbot
+        image: saarthicore114.azurecr.io/kreditbee_exotil_updated
+        ports:
+        - containerPort: 7114
+        - containerPort: 7222
+
+        resources:
+          limits:
+            cpu: 5000m
+            memory: 25Gi
+          requests:
+            cpu: 1000m
+            memory: 10Gi
+      imagePullSecrets:
+        - name: secrets-key
